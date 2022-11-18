@@ -27,6 +27,7 @@ public class CompanyRepositoryImpl implements CompanyRepository {
 
     @Override
     public void saveCompany(Company company) {
+        System.out.println("persist");
         entityManager.persist(company);
 
     }

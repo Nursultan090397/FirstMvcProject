@@ -1,6 +1,7 @@
 package peaksoft.model;
 
 
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.*;
 
 
 @Getter
@@ -35,14 +36,21 @@ public class Course {
     private String description;
 
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},
+    @ManyToOne(cascade = {MERGE, CascadeType.DETACH, CascadeType.REFRESH},
             fetch = FetchType.EAGER)
     private Company company;
 
-   /* @ManyToMany(cascade = ALL, fetch = FetchType.LAZY,mappedBy = "course")
-    private List<Group> groups = new ArrayList<>();
+    /*@ManyToMany(cascade = {PERSIST,MERGE,REFRESH,DETACH}, fetch = FetchType.LAZY,mappedBy = "course")
+  private List<Group> groups;
 
-    @OneToMany(cascade = ALL, fetch = FetchType.LAZY,mappedBy = "course")
+    public void addGroups(Group group){
+        if (groups==null){
+            groups=new ArrayList<>();
+        }
+        groups.add(group);
+    }*/
+
+/*    @OneToMany(cascade = ALL, fetch = FetchType.LAZY,mappedBy = "course")
     private List<peaksoft.model.Instructor> instructors = new ArrayList<>();*/
 
   /*  @OneToMany(cascade = ALL, fetch = FetchType.LAZY,mappedBy = "course")

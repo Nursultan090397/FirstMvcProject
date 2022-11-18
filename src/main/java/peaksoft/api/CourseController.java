@@ -1,5 +1,6 @@
 package peaksoft.api;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,29 +9,27 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import peaksoft.model.Course;
-import peaksoft.model.Group;
 import peaksoft.service.CompanyService;
 import peaksoft.service.CourseService;
 
 @Controller
 public class CourseController {
     private final CourseService courseService;
-    private final CompanyService companyService;
+
 
 
     @Autowired
-    public CourseController(CourseService courseService, CompanyService companyService) {
+    public CourseController(CourseService courseService, CompanyService companyService/*, GroupService groupService*/) {
         this.courseService = courseService;
-        this.companyService = companyService;
+
 
     }
 
 
     @GetMapping("/courses/{id}")
-    public String getAllCourses(@PathVariable Long id, Model model,
-                                @ModelAttribute("group") Group group) {
-        model.addAttribute("courses", courseService.getCourseById(id));
-        model.addAttribute("companyId",id);
+    public String getAllCourses(@PathVariable Long id, Model model) {
+        model.addAttribute("courses", courseService.getAllCourses());
+        model.addAttribute("companyId", id);
         return "/course/courses";
     }
 
@@ -45,7 +44,7 @@ public class CourseController {
     public String addCourse(@PathVariable Long id, Model model) {
         model.addAttribute("course", new Course());
         model.addAttribute("companyId", id);
-        return "add_course";
+        return "/course/add_course";
     }
 
     @PostMapping("/{id}/saveCourse")
@@ -60,7 +59,7 @@ public class CourseController {
         Course course = courseService.getCourseById(id);
         model.addAttribute("course", course);
         model.addAttribute("companyId", course.getCompany().getId());
-        return "update_course";
+        return "/course/update_course";
     }
 
     @PostMapping("/{companyId}/{id}/saveUpdateCourse")

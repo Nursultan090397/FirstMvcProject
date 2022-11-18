@@ -2,7 +2,6 @@ package peaksoft.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-
 public class DispatcherServlet extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
@@ -12,7 +11,7 @@ public class DispatcherServlet extends AbstractAnnotationConfigDispatcherServlet
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{peaksoft.config.WebAppConfig.class};
+        return new Class[]{WebAppConfig.class};
     }
 
     @Override

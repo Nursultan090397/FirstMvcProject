@@ -9,21 +9,21 @@ import peaksoft.service.CompanyService;
 
 import java.util.List;
 
-
 @Controller
-@RequestMapping("/company")
 public class CompanyController {
 
-    private final CompanyService companyService;
+    private final CompanyService service;
 
     @Autowired
     public CompanyController(CompanyService companyService) {
-        this.companyService = companyService;
+        this.service = companyService;
     }
+
 
     @GetMapping("/getAllCompanies")
     public String getCompanies(Model model) {
-        List<Company> companies = companyService.getAllCompanies();
+        System.out.println("all");
+        List<Company> companies = service.getAllCompanies();
         model.addAttribute("companies", companies);
         return "/company/all_companies";
     }
@@ -31,31 +31,31 @@ public class CompanyController {
     @GetMapping("/addCompany")
     public String addCompany(Model model) {
         model.addAttribute("company", new Company());
-        return "company/addCompany";
+        return "/company/addCompany";
     }
 
     @PostMapping("/saveCompany")
     public String saveCompany(@ModelAttribute("company") Company company) {
-        companyService.saveCompany(company);
+        service.saveCompany(company);
         return "redirect:/getAllCompanies";
     }
 
     @GetMapping("updateCompany")
     public String updateCompany(@RequestParam("companyId") Long id, Model model) {
-        Company company = companyService.getCompanyById(id);
+        Company company = service.getCompanyById(id);
         model.addAttribute("company", company);
         return "/company/update_company";
     }
 
     @PostMapping("/saveUpdateCompany")
     public String saveUpdateCompany(@ModelAttribute("company") Company company) {
-        companyService.updateCompany(company);
+        service.updateCompany(company);
         return "redirect:/getAllCompanies";
     }
 
     @RequestMapping("/deleteCompany")
-    public String deleteCompany(@RequestParam("companyId") Long id) {
-        companyService.removeCompany(companyService.getCompanyById(id));
+    public String removeCompany(@RequestParam("companyId") Long id) {
+        service.removeCompany(service.getCompanyById(id));
         return "redirect:/getAllCompanies";
     }
 }
