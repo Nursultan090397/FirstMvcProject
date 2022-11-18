@@ -27,8 +27,10 @@ public class Company {
 
     private Long id;
 
+    @Column(length = 100000,name = "company_name")
     private String companyName;
 
+    @Column(length = 100000,name = "located_country")
     private String locatedCountry;
 
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY,mappedBy = "company")

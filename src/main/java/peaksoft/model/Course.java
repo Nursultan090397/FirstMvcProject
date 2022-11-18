@@ -1,7 +1,5 @@
 package peaksoft.model;
 
-
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,26 +27,30 @@ public class Course {
 
     private Long id;
 
+    @Column(name = "course_name", length = 100000)
     private String courseName;
 
+    @Column(name = "duration", length = 100000)
     private int duration;
 
+    @Column(name = "description", length = 100000)
     private String description;
 
 
-    @ManyToOne(cascade = {MERGE, CascadeType.DETACH, CascadeType.REFRESH},
+    @ManyToOne(cascade = {MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST},
             fetch = FetchType.EAGER)
     private Company company;
 
-    /*@ManyToMany(cascade = {PERSIST,MERGE,REFRESH,DETACH}, fetch = FetchType.LAZY,mappedBy = "course")
-  private List<Group> groups;
+    @ManyToMany(cascade = {PERSIST, MERGE, REFRESH, DETACH}, fetch = FetchType.LAZY, mappedBy = "course")
+    private List<Group> groups;
 
-    public void addGroups(Group group){
-        if (groups==null){
-            groups=new ArrayList<>();
+    public void addGroup(Group group) {
+        if (groups == null) {
+            groups = new ArrayList<>();
         }
         groups.add(group);
-    }*/
+    }
+}
 
 /*    @OneToMany(cascade = ALL, fetch = FetchType.LAZY,mappedBy = "course")
     private List<peaksoft.model.Instructor> instructors = new ArrayList<>();*/
@@ -57,4 +59,4 @@ public class Course {
     private List<Lesson> lessons = new ArrayList<>();*/
 
 
-}
+

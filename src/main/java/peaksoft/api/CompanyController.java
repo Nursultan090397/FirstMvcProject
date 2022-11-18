@@ -40,7 +40,7 @@ public class CompanyController {
         return "redirect:/getAllCompanies";
     }
 
-    @GetMapping("updateCompany")
+    @GetMapping("/updateCompany")
     public String updateCompany(@RequestParam("companyId") Long id, Model model) {
         Company company = service.getCompanyById(id);
         model.addAttribute("company", company);
@@ -54,8 +54,8 @@ public class CompanyController {
     }
 
     @RequestMapping("/deleteCompany")
-    public String removeCompany(@RequestParam("companyId") Long id) {
-        service.removeCompany(service.getCompanyById(id));
+    public String deleteCompany(@RequestParam("companyId") Long id) {
+        service.deleteCompany(service.getCompanyById(id));
         return "redirect:/getAllCompanies";
     }
 }

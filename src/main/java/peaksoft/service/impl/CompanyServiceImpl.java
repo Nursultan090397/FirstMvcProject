@@ -45,8 +45,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public void removeCompany(Company company) {
-        companyRepository.removeCompany(company);
+    public void deleteCompany(Company company) {
+        companyRepository.deleteCompany(company);
 
     }
 }

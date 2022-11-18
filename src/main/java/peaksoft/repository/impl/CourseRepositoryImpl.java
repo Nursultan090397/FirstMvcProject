@@ -48,7 +48,7 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
-    public void removeCourse(Long id) {
+    public void deleteCourse(Long id) {
         entityManager.remove(entityManager.find(Course.class,id));
 
     }

@@ -1,6 +1,7 @@
 package peaksoft.api;
 
 
+import jdk.javadoc.internal.doclets.toolkit.util.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,20 +15,20 @@ import peaksoft.service.CourseService;
 
 @Controller
 public class CourseController {
+    private final CompanyService companyService;
     private final CourseService courseService;
 
 
-
     @Autowired
-    public CourseController(CourseService courseService, CompanyService companyService/*, GroupService groupService*/) {
+    public CourseController(CourseService courseService, CompanyService companyService,/*, GroupService groupService*/CompanyService companyService1) {
         this.courseService = courseService;
-
-
+        this.companyService = companyService1;
     }
 
 
     @GetMapping("/courses/{id}")
-    public String getAllCourses(@PathVariable Long id, Model model) {
+    public String getAllCourses(@PathVariable Long id, Model model,
+                                @ModelAttribute("group") Group group) {
         model.addAttribute("courses", courseService.getAllCourses());
         model.addAttribute("companyId", id);
         return "/course/courses";

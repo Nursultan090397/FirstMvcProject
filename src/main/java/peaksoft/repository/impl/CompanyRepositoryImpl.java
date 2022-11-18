@@ -44,7 +44,7 @@ public class CompanyRepositoryImpl implements CompanyRepository {
     }
 
     @Override
-    public void removeCompany(Company company) {
+    public void deleteCompany(Company company) {
         entityManager.remove(entityManager.contains(company) ? company : entityManager.merge(company));
 
     }
